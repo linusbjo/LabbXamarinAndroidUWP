@@ -13,6 +13,13 @@ namespace LabbXamarinAndroidUWP
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = App.CrimeEvents.CrimeEventList;
+        }
+
+        private async void btn_UpdateAPI(object sender, EventArgs e)
+        {
+            await label.RelRotateTo(360, 1000);
+            EmployeeView.ItemsSource = App.CrimeEvents.CrimeEventList;
         }
     }
 }

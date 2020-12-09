@@ -4,6 +4,8 @@ using System.Text;
 
 namespace LabbXamarinAndroidUWP.Models
 {
+
+    // Everything below is made from JSON and I do not dare to change any of the names
     public class CrimeEventRoot
     {
         public Links links { get; set; }
