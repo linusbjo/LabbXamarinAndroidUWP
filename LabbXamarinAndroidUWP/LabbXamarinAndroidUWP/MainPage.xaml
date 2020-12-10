@@ -28,7 +28,7 @@
                     </FormattedString>
                 </Label.FormattedText>
             </Label>-->
-            <ListView x:Name="EmployeeView"
+            <ListView x:Name="CrimeEventView"
             ItemsSource="{Binding CrimeEventList}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
