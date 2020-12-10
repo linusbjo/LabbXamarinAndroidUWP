@@ -12,6 +12,7 @@ namespace LabbXamarinAndroidUWP
         public App()
         {
             InitializeComponent();
+            App.CrimeEvents.isLoadingAPI = true; //TODO: find better spot for it
             MainPage = new MainPage();
         }
 
