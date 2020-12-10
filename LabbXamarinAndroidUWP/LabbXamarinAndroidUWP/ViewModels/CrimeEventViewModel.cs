@@ -31,7 +31,6 @@ namespace LabbXamarinAndroidUWP.ViewModels
                     // This one requires the Root class and cannot be directly made into a list
                     CrimeEventRoot CrimeRoot = JsonConvert.DeserializeObject<CrimeEventRoot>(content);
 
-                    //TODO: debug
                     // Data is an array / list, so it is seperated and put into my list
                     foreach (var item in CrimeRoot.data)
                     {
@@ -50,17 +49,10 @@ namespace LabbXamarinAndroidUWP.ViewModels
             {
                 StopActivityInidcator();
                 string errormsg = error.Message;
-                //TODO: Error logic
-
             }
         }
 
-        //internal async Task AssignDefaultValues() 
-        //{
-        //    isLoadingAPI = true;
-        //    showContent = false;
-        //}
-
+        // Show content, remove loading screen and tell Xamarin the properties are changed
         protected void StopActivityInidcator() 
         {
             showContent = true;

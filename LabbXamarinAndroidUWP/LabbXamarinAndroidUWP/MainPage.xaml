@@ -28,7 +28,14 @@
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
-
+            <ListView x:Name="EmployeeView"
+            ItemsSource="{Binding CrimeEventList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding title_location}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </StackLayout>
 </ContentPage>
