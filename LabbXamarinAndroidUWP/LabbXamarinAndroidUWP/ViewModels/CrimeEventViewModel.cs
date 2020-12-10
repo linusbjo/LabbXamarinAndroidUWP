@@ -17,8 +17,9 @@ namespace LabbXamarinAndroidUWP.ViewModels
         public bool showContent { get; set; }
         internal async Task LoadData()
         {
-               string apiURL = @"http://brottsplatskartan.se/api/events/";
-
+            //string apiURL = @"http://brottsplatskartan.se/api/events/";
+            string apiURL = @"http://193.10.202.70/BookApi/api/BooksSimple";
+            
             try
             {
                 HttpClient client = new HttpClient();

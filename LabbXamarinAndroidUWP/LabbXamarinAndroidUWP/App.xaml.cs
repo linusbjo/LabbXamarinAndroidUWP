@@ -16,7 +16,7 @@ namespace LabbXamarinAndroidUWP
             //TODO: Better method for this???
             App.CrimeEvents.isLoadingAPI = true;
             App.CrimeEvents.showContent = false;
-
+            
             MainPage = new MainPage();
         }
 
