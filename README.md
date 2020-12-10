@@ -1,5 +1,7 @@
 # Laboration Xamarin 
-Detta är en labb för Xamarin.
+Detta är en labb för Xamarin. Jag har utvecklat för Android och UWP. 
+
+Både UWP och Android har fungerat.
 
 # API som används
 
