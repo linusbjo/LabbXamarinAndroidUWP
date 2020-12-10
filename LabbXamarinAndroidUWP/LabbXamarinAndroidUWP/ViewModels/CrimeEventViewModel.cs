@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LabbXamarinAndroidUWP.ViewModels
 {
@@ -13,19 +14,8 @@ namespace LabbXamarinAndroidUWP.ViewModels
     {
         public ObservableCollection<data> CrimeEventList { get; set; } = new ObservableCollection<data>();
         public bool isLoadingAPI { get; set; }
-
-        //TODO: Ta bort sedan
-        public string myName
-        {
-            get
-            {
-                return "Hello World";
-            }
-        }
-
-
-
-        internal async System.Threading.Tasks.Task LoadData()
+        public bool showContent { get; set; }
+        internal async Task LoadData()
         {
                string apiURL = @"http://brottsplatskartan.se/api/events/";
 
@@ -41,34 +31,43 @@ namespace LabbXamarinAndroidUWP.ViewModels
                     // This one requires the Root class and cannot be directly made into a list
                     CrimeEventRoot CrimeRoot = JsonConvert.DeserializeObject<CrimeEventRoot>(content);
 
-                   
-
                     //TODO: debug
                     // Data is an array / list, so it is seperated and put into my list
                     foreach (var item in CrimeRoot.data)
                     {
                         CrimeEventList.Add(item);
                     }
-                    StopActivityIndicator();
+                    StopActivityInidcator();
                     RaisePropertyChanged(nameof(CrimeEventList));
                 }
                 else
                 {
                     //TODO: Error logic
+                    StopActivityInidcator();
                 }
             }
             catch (Exception error)
             {
-                StopActivityIndicator();
+                StopActivityInidcator();
+                string errormsg = error.Message;
                 //TODO: Error logic
-               
+
             }
         }
 
-        protected void StopActivityIndicator() 
+        //internal async Task AssignDefaultValues() 
+        //{
+        //    isLoadingAPI = true;
+        //    showContent = false;
+        //}
+
+        protected void StopActivityInidcator() 
         {
+            showContent = true;
             isLoadingAPI = false;
+
             RaisePropertyChanged(nameof(isLoadingAPI));
+            RaisePropertyChanged(nameof(showContent));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -78,6 +77,18 @@ namespace LabbXamarinAndroidUWP.ViewModels
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+        
+    }
+    public interface IMessageService
+    {
+        Task ShowAsync(string message);
+    }
+    public class MessageService : IMessageService
+    {
+        public async Task ShowAsync(string message)
+        {
+            await App.Current.MainPage.DisplayAlert("YourApp", message, "Ok");
         }
     }
 }

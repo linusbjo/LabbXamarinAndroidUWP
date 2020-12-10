@@ -4,32 +4,31 @@
              x:Class="LabbXamarinAndroidUWP.MainPage">
 
     <StackLayout>
-        <!--<Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-        </Frame>
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
-        <Label FontSize="16" Padding="30,24,30,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Learn more at "/>
-                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>-->
 
-        <!-- Loading the API data -->
-        <Label Text="{Binding myName}" />
-        <ActivityIndicator IsVisible="True" IsRunning="{Binding isLoadingAPI}" Color="Aqua" HorizontalOptions="Center" VerticalOptions="Center"/>
-        <ListView ItemsSource="{Binding CrimeEventList}" HasUnevenRows="True">
-            <ListView.ItemTemplate >
-                <DataTemplate>
-                    <Label Text="{Binding id}" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <!-- Center loading bar, show before API is loaded -->
+        <StackLayout IsVisible="{Binding isLoadingAPI}" IsEnabled="{Binding isLoadingAPI}" Margin="70">
+            <Label Text="Data is loading" HorizontalOptions="Center"/>
+            <ActivityIndicator IsVisible="{Binding isLoadingAPI}" IsRunning="{Binding isLoadingAPI}" Color="Aqua" />
+        </StackLayout>
 
+        <!-- Main data is here, show after API -->
+        <StackLayout IsVisible="{Binding showContent}" IsEnabled="{Binding showContent}">
+            <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+                <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+            </Frame>
+            <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
+            <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
+            <Label FontSize="16" Padding="30,24,30,0">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <FormattedString.Spans>
+                            <Span Text="Learn more at "/>
+                            <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
+                        </FormattedString.Spans>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+        </StackLayout>
     </StackLayout>
 </ContentPage>

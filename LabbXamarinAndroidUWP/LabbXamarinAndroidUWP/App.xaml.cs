@@ -12,13 +12,17 @@ namespace LabbXamarinAndroidUWP
         public App()
         {
             InitializeComponent();
-            App.CrimeEvents.isLoadingAPI = true; //TODO: find better spot for it
+ 
+            //TODO: Better method for this???
+            App.CrimeEvents.isLoadingAPI = true;
+            App.CrimeEvents.showContent = false;
+
             MainPage = new MainPage();
         }
 
         protected override async void OnStart()
         {
-            await CrimeEvents.LoadData();
+           await CrimeEvents.LoadData();
         }
 
         protected override void OnSleep()

@@ -15,10 +15,5 @@ namespace LabbXamarinAndroidUWP
             InitializeComponent();
             BindingContext = App.CrimeEvents;
         }
-
-        private void showActivityIndicator() 
-        {
-       
-        }
     }
 }
