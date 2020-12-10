@@ -80,15 +80,4 @@ namespace LabbXamarinAndroidUWP.ViewModels
         }
         
     }
-    public interface IMessageService
-    {
-        Task ShowAsync(string message);
-    }
-    public class MessageService : IMessageService
-    {
-        public async Task ShowAsync(string message)
-        {
-            await App.Current.MainPage.DisplayAlert("YourApp", message, "Ok");
-        }
-    }
 }
