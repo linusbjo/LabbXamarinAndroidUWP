@@ -19,15 +19,18 @@
         <!-- Main data is here, show after API -->
         <StackLayout IsVisible="{Binding showContent}" IsEnabled="{Binding showContent}">
             <Grid>
-                <ListView x:Name="CrimeEventView" ItemsSource="{Binding CrimeEventList}">
+                <ListView 
+                    ItemsSource="{Binding CrimeEventList}"  
+                    ItemSelected="itemSelected" 
+                    ItemTapped="itemTapped">
                     <ListView.ItemTemplate>
                         <DataTemplate >
                             <ViewCell>
                                 <StackLayout>
-                                    <StackLayout>
                                         <Label Text="{Binding title_type}"  />
-                                        <Label Text="{Binding content_teaser}" />
-                                    </StackLayout>
+                                        <Label Text="{Binding id}"/>
+                                        <Label Text="{Binding content_teaser}"/>
+                                        <Label Text="{Binding title_location}"/>
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>

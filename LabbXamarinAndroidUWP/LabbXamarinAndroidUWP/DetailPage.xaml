@@ -4,9 +4,12 @@
              x:Class="LabbXamarinAndroidUWP.DetailPage"
              Title="Details">
     <ContentPage.Content>
+        
         <StackLayout>
+            <Image Source="{Binding image}" />
             <Label Text="{Binding description}" />
-            <Button Text="Close" Clicked="ButtonDismissModal"/>
+            <Label Text="{Binding id}" />
+            <Button Text="Tillbaka" Clicked="ButtonDismissModal"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
