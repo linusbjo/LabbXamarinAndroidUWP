@@ -17,7 +17,10 @@ namespace LabbXamarinAndroidUWP
             App.CrimeEvents.isLoadingAPI = true;
             App.CrimeEvents.showContent = false;
 
-            MainPage = new MainPage();
+            NavigationPage page = new NavigationPage(new MainPage());
+            //page.BackgroundColor = (Color)Application.Current.Resources["Green"];
+
+            MainPage = page;
         }
 
         protected override async void OnStart()
