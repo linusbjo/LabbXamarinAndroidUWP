@@ -13,11 +13,11 @@ namespace LabbXamarinAndroidUWP.ViewModels
     public class CrimeEventViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<data> CrimeEventList { get; set; } = new ObservableCollection<data>();
-        public bool isLoadingAPI { get; set; }
-        public bool showContent { get; set; }
+        public bool isLoadingAPI { get; set; } // When false, don't show loading indicator
+        public bool showContent { get; set; } // When true, show API data 
         internal async Task LoadData()
         {
-               string apiURL = @"http://brottsplatskartan.se/api/events/";
+            string apiURL = @"http://brottsplatskartan.se/api/events/";
 
             try
             {
@@ -42,23 +42,25 @@ namespace LabbXamarinAndroidUWP.ViewModels
                 else
                 {
                     //TODO: Error logic
+
+                    LoadTestData();
                     StopActivityInidcator();
                 }
             }
             catch (Exception error)
             {
+                //TODO: Error logic
                 StopActivityInidcator();
-                string errormsg = error.Message;
             }
         }
 
         // Show content, remove loading screen and tell Xamarin the properties are changed
         protected void StopActivityInidcator() 
         {
-            showContent = true;
             isLoadingAPI = false;
-
             RaisePropertyChanged(nameof(isLoadingAPI));
+
+            showContent = true;
             RaisePropertyChanged(nameof(showContent));
         }
 
@@ -70,6 +72,18 @@ namespace LabbXamarinAndroidUWP.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        
+
+        protected void LoadTestData()
+        {
+            List<data> datalist = new List<data>();
+            datalist.Add(new data { location_string = "Göteborg", title_type = "Dråp", content_teaser = "Man för dråp", id = 1});
+            datalist.Add(new data { location_string = "Stenugnsund", title_type = "Trafikkontroll", content_teaser = "Magnus körde fort",id = 2 });
+            datalist.Add(new data { location_string = "Trollhättan", title_type = "Inbrott", content_teaser = "Man bröt sig in hos Mahnus", id = 3 });
+
+            foreach (var item in datalist)
+            {
+                CrimeEventList.Add(item);
+            }
+        }
     }
 }

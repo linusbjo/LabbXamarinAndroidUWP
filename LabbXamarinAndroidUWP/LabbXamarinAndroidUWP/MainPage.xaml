@@ -2,42 +2,150 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LabbXamarinAndroidUWP.MainPage"
-             Title="Brottsplatsen händelser">
+             Title="Nyheter">
 
-   
+    <!--<Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Text="Senaste händelser:" Grid.Row="0"/>
 
-    <StackLayout>
-
-      
-
-        <!-- Center loading bar, show before API is loaded -->
+        <ListView
+            ItemsSource="{Binding CrimeEventList}"  
+            ItemSelected="itemSelected" 
+            ItemTapped="itemTapped"
+            IsVisible="{Binding showContent}" IsEnabled="{Binding showContent}"
+            Grid.Row="1" RowHeight="100">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding title_type}" FontAttributes="Bold" />
+                            <Label Text="{Binding content_teaser}" FontSize="Medium" />
+                            <Label Text="{Binding location_string}" FontSize="Small"  />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>-->
+    <StackLayout Padding="3">
+        
         <StackLayout IsVisible="{Binding isLoadingAPI}" IsEnabled="{Binding isLoadingAPI}" Margin="70">
             <Label Text="Data is loading" HorizontalOptions="Center"/>
             <ActivityIndicator IsVisible="{Binding isLoadingAPI}" IsRunning="{Binding isLoadingAPI}" Color="Aqua" />
         </StackLayout>
-                                                        
-        <!-- Main data is here, show after API -->
-        <StackLayout IsVisible="{Binding showContent}" IsEnabled="{Binding showContent}">
-            <Grid>
-                <ListView 
-                    ItemsSource="{Binding CrimeEventList}"  
-                    ItemSelected="itemSelected" 
-                    ItemTapped="itemTapped">
-                    <ListView.ItemTemplate>
-                        <DataTemplate >
-                            <ViewCell>
-                                <StackLayout>
-                                        <Label Text="{Binding title_type}"  />
-                                        <Label Text="{Binding id}"/>
-                                        <Label Text="{Binding content_teaser}"/>
-                                        <Label Text="{Binding title_location}"/>
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </Grid>
-           
-        </StackLayout>
+
+
+        <!-- used https://github.com/xamarin/xamarin-forms-samples/blob/master/WorkingWithListview/WorkingWithListview/Uneven/UnevenRowsXaml.xaml-->
+        
+        <ListView   
+            ItemsSource="{Binding CrimeEventList}" 
+            ItemSelected="onListViewSelected" ItemTapped="onListViewTapped" 
+            IsVisible="{Binding showContent}" 
+            IsEnabled="{Binding showContent}"
+            HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate >
+                    <ViewCell>
+                        <StackLayout Padding="15, 5, 5, 5" HorizontalOptions="StartAndExpand" Orientation="Vertical">
+                            <Label Text="{Binding title_type}" VerticalTextAlignment="Center" FontSize="Title" />
+                            <Label Text="{Binding content_teaser}" FontSize="Caption" />
+                            <Label Text="{Binding location_string}" FontSize="Default"  />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackLayout>
 </ContentPage>
+
+
+<!-- Main data is here, show after API -->
+
+<!--<StackLayout Spacing="">
+
+     Center loading bar, show before API is loaded 
+    <StackLayout IsVisible="{Binding isLoadingAPI}" IsEnabled="{Binding isLoadingAPI}" Margin="70">
+        <Label Text="Data is loading" HorizontalOptions="Center"/>
+        <ActivityIndicator IsVisible="{Binding isLoadingAPI}" IsRunning="{Binding isLoadingAPI}" Color="Aqua" />
+    </StackLayout>
+
+
+        <ListView 
+                    ItemsSource="{Binding CrimeEventList}"  
+                    ItemSelected="itemSelected" 
+                    ItemTapped="itemTapped"
+                    IsVisible="{Binding showContent}" IsEnabled="{Binding showContent}">
+        <ListView.ItemTemplate>
+            <DataTemplate >
+                <ViewCell>
+
+                    <StackLayout Padding="60">
+                        <Label Grid.Column="1" Text="{Binding title_type}" FontAttributes="Bold" />
+
+                        <Label Text="{Binding content_teaser}" FontSize="Medium" />
+                        <Label Text="{Binding location_string}" FontSize="Small"  />
+                    </StackLayout>
+
+
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+
+
+    <ListView 
+                    ItemsSource="{Binding CrimeEventList}"  
+                    ItemSelected="itemSelected" 
+                    ItemTapped="itemTapped"
+                    IsVisible="{Binding showContent}" IsEnabled="{Binding showContent}">
+                <ListView.ItemTemplate>
+                    <DataTemplate >
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                            <Label Grid.Column="1" Text="{Binding title_type}" FontAttributes="Bold" />
+                            <StackLayout Orientation="Vertical">
+                                    <Label Text="{Binding content_teaser}" FontSize="Medium" />
+                                    <Label Text="{Binding location_string}" FontSize="Small"  />
+                                </StackLayout>
+                        </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+    <ListView ItemsSOurce="{Binding Players}" RowHeight="75">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid BackgroundColor="Gray">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="15"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <ContentView Grid.RowSpan="2" BackgroundColor="Blue">
+                                <Label Text="{Binding PlayerId}" Rotation="90" TextColor="White"/>
+                            </ContentView>
+                        <Label Grid.Column="1" Text="{Binding Date}" TextColor="White" BackgroundColor="Red" HorizontalOptions="End"/>
+                    </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+</StackLayout>-->

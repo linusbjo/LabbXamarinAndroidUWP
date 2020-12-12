@@ -16,9 +16,9 @@ namespace LabbXamarinAndroidUWP
             //TODO: Better method for this???
             App.CrimeEvents.isLoadingAPI = true;
             App.CrimeEvents.showContent = false;
-
+            
             NavigationPage page = new NavigationPage(new MainPage());
-            //page.BackgroundColor = (Color)Application.Current.Resources["Green"];
+            //page.BarBackgroundColor = (Color)Application.Current.Resources["Red"];
 
             MainPage = page;
         }

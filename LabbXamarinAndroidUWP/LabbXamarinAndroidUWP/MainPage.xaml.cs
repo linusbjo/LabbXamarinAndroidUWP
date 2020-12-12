@@ -13,16 +13,18 @@ namespace LabbXamarinAndroidUWP
 {
     public partial class MainPage : ContentPage
     {
-
+        // If I get selected item in itemTapped, it would only select the first item in the list regardless.
+        // This variable solved my problem and gets the selected item
         private data _event = new data();
         public MainPage()
         {
             InitializeComponent();
             BindingContext = App.CrimeEvents;
+            
         }
 
         // Opens details page
-        async void itemTapped(object sender, SelectedItemChangedEventArgs e)
+        async void onListViewTapped(object sender, SelectedItemChangedEventArgs e)
         {
             // This modal comes from Microsoft docs
             // https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/navigation/modal
@@ -42,12 +44,12 @@ namespace LabbXamarinAndroidUWP
             }
             catch (Exception error)
             {
-                await DisplayAlert("Error", error.Message.ToString(), "Close");
+                await DisplayAlert("Error - could not display data", error.Message.ToString(), "Close");
             }         
         }
 
         // This gets the correct selected item
-        async void itemSelected(object sender, SelectedItemChangedEventArgs e)
+        async void onListViewSelected(object sender, SelectedItemChangedEventArgs e)
         {
             try
             {
@@ -55,7 +57,7 @@ namespace LabbXamarinAndroidUWP
             }
             catch (Exception error)
             {
-                await DisplayAlert("Error", error.Message.ToString(), "Close");
+                await DisplayAlert("Error - could not display data", error.Message.ToString(), "Close");
             }        
         }
     }

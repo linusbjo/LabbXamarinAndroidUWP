@@ -6,13 +6,17 @@
     <!-- If you want to override anything you can do that here. -->
     <!-- Underneath are a couple of entries to get you started. -->
 
-    <!-- Set theme colors from https://aka.ms/material-colors -->
-    <!-- colorPrimary is used for the default action bar background -->
-    <!--<item name="colorPrimary">#2196F3</item>-->
-    <!-- colorPrimaryDark is used for the status bar -->
-    <item name="colorPrimaryDark">#ff0000</item>
-    <!-- colorAccent is used as the default value for colorControlActivated
+
+	  <!-- Set theme colors from https://aka.ms/material-colors -->
+	  <!-- colorPrimary is used for the default action bar background -->
+
+	  <!--I could not get code in C# to work, so I hardcoded it-->
+	  
+	  <item name="colorPrimary">#ff0000</item>
+	  <!-- colorPrimaryDark is used for the status bar -->
+	  <item name="colorPrimaryDark">#ff0000</item>
+	  <!-- colorAccent is used as the default value for colorControlActivated
          which is used to tint widgets -->
-    <item name="colorAccent">#404040</item>-->
+	  <!--<item name="colorAccent">#FF4081</item>-->
   </style>
 </resources>
