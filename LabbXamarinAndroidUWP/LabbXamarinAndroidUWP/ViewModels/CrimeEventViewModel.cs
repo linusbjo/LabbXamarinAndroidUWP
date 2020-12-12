@@ -103,7 +103,7 @@ namespace LabbXamarinAndroidUWP.ViewModels
             {
                 return System.Text.RegularExpressions.Regex.Replace(content, "<.*?>", String.Empty);
             }
-            catch (Exception)
+            catch 
             {
                 // return content if regex failed
                 return content;
