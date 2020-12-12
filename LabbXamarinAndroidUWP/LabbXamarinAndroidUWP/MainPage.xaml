@@ -52,7 +52,7 @@
                         <StackLayout Padding="15, 5, 5, 5" HorizontalOptions="StartAndExpand" Orientation="Vertical">
                             <Label Text="{Binding title_type}" VerticalTextAlignment="Center" FontSize="Title" />
                             <Label Text="{Binding content_teaser}" FontSize="Caption" />
-                            <Label Text="{Binding location_string}" FontSize="Default"  />
+                            <Label Text="{Binding location_string} {Binding date_human}" FontSize="Default"  />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

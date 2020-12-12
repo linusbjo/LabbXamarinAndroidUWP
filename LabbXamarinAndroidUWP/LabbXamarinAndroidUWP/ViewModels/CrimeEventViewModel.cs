@@ -23,7 +23,7 @@ namespace LabbXamarinAndroidUWP.ViewModels
             {
                 HttpClient client = new HttpClient();
                 HttpResponseMessage response = await client.GetAsync(new Uri(apiURL)); // Calling api
-
+                
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
@@ -34,6 +34,15 @@ namespace LabbXamarinAndroidUWP.ViewModels
                     // Data is an array / list, so it is seperated and put into my list
                     foreach (var item in CrimeRoot.data)
                     {
+                        // Content contains html tags which shows up in Xamarin
+                        item.content = RemoveTagsHTML(item.content);
+                       
+                        // If content does not contain alot of text, I just type what is normally said
+                        if (item.content_teaser == null || item.content_teaser.Length < 3)
+                        {
+                            item.content_teaser = "Händelsesidan uppdateras inte mer i dag."; // Content teaser is sometimes empty, I add the description explaining why
+                        }
+
                         CrimeEventList.Add(item);
                     }
                     StopActivityInidcator();
@@ -73,17 +82,33 @@ namespace LabbXamarinAndroidUWP.ViewModels
             }
         }
 
+        // Test data if API fails
         protected void LoadTestData()
         {
             List<data> datalist = new List<data>();
             datalist.Add(new data { location_string = "Göteborg", title_type = "Dråp", content_teaser = "Man för dråp", id = 1});
             datalist.Add(new data { location_string = "Stenugnsund", title_type = "Trafikkontroll", content_teaser = "Magnus körde fort",id = 2 });
-            datalist.Add(new data { location_string = "Trollhättan", title_type = "Inbrott", content_teaser = "Man bröt sig in hos Mahnus", id = 3 });
+            datalist.Add(new data { location_string = "Trollhättan", title_type = "Inbrott", content_teaser = "Man bröt sig in hos Magnus", id = 3 });
 
             foreach (var item in datalist)
             {
                 CrimeEventList.Add(item);
             }
+        }
+        protected string RemoveTagsHTML(string content)
+        {
+            // https://stackoverflow.com/questions/18153998/how-do-i-remove-all-html-tags-from-a-string-without-knowing-which-tags-are-in-it
+
+            try
+            {
+                return System.Text.RegularExpressions.Regex.Replace(content, "<.*?>", String.Empty);
+            }
+            catch (Exception)
+            {
+                // return content if regex failed
+                return content;
+            }
+           
         }
     }
 }

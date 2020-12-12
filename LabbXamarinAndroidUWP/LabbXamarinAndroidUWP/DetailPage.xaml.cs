@@ -3,21 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace LabbXamarinAndroidUWP
 {
+
+
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DetailPage : ContentPage
     {
+        // https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/text/label#hyperlinks
+        public System.Windows.Input.ICommand TapCommand => new Command<string>(async (url) => await Launcher.OpenAsync(url));
         public DetailPage()
         {
             InitializeComponent();
+            BindingContext = this;
         }
 
-        private async void ButtonDismissModal(object sender, EventArgs e)
+        private async void onClickedCloseModal(object sender, EventArgs e)
         {
             await Navigation.PopModalAsync();
         }

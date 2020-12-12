@@ -5,14 +5,35 @@
              Title="Details">
     <ContentPage.Content>
         <StackLayout Padding="24">
-                 
+
             <StackLayout>
                 <Image Source="{Binding image}"/>
                 <Label Text="{Binding description}" />
+                <Label Text="{Binding content}" />
                 <Label Text="{Binding id}" />
-                <Button Text="Tillbaka" Clicked="ButtonDismissModal" BackgroundColor="#ff0000"/>
+                <!--<Label Text="{Binding external_source_link}" TextColor="red" />
+                <Label Text="{Binding permalink}" TextColor="red" />-->
+
+
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding external_source_link}"
+                                TextColor="Blue"
+                                TextDecorations="Underline">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding TapCommand}"
+                                          CommandParameter="{Binding external_source_link}" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                            <Span Text=" to view Xamarin documentation." />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Button Text="Tillbaka" Clicked="onClickedCloseModal" BackgroundColor="#ff0000"/>
             </StackLayout>
-         
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
