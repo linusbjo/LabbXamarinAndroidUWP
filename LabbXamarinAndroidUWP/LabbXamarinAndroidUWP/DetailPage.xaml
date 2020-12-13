@@ -3,37 +3,57 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LabbXamarinAndroidUWP.DetailPage"
              Title="Details">
-    <ContentPage.Content>
-        <StackLayout Padding="24">
+    <ContentPage.Content >
+        <OnPlatform x:TypeArguments="View">
+            <!--Android-->
+            <On Platform="Android">
+                <ScrollView>
 
-            <StackLayout>
-                <Image Source="{Binding image}"/>
-                <Label Text="{Binding description}" />
-                <Label Text="{Binding content}" />
-                <Label Text="{Binding id}" />
-                <!--<Label Text="{Binding external_source_link}" TextColor="red" />
-                <Label Text="{Binding permalink}" TextColor="red" />-->
+                    <StackLayout Padding="24">
+                        <Image Source="{Binding image}"/>
+                        <Label Text="{Binding description}" TextColor="Black" FontAttributes="Bold"/>
+                        <Label Text="{Binding content}" TextColor="Black"/>
+                        <!--<Label Text="{Binding id}" />-->
 
-
-                <Label>
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="{Binding external_source_link}"
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding external_source_link}"
                                 TextColor="Blue"
                                 TextDecorations="Underline">
-                                <Span.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding TapCommand}"
+                                        <Span.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding TapCommand}"
                                           CommandParameter="{Binding external_source_link}" />
-                                </Span.GestureRecognizers>
-                            </Span>
-                            <Span Text=" to view Xamarin documentation." />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+                                        </Span.GestureRecognizers>
+                                    </Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
 
-                <Button Text="Tillbaka" Clicked="onClickedCloseModal" BackgroundColor="#ff0000"/>
-            </StackLayout>
+                        <Button Text="Tillbaka" Clicked="onClickedCloseModal" BackgroundColor="#ff0000"/>
+                    </StackLayout>
+                </ScrollView>
+            </On>
+            <!--Desktop-->
+            <On Platform="UWP">
+                <StackLayout>
+                    <StackLayout Orientation="Vertical" VerticalOptions="Start" Margin="24">
+                        <Image Source="{Binding image}" />
+                        <Label Text="{Binding description}" />
+                        <Label Text="{Binding content}" />
+                        <Label Text="{Binding id}" />
+                    </StackLayout>
 
-        </StackLayout>
+                    <StackLayout Margin="24">
+                        <Label Text="{Binding external_source_link}" TextColor="red" />
+                        <Label Text="{Binding permalink}" TextColor="red" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center" >
+                        <Button Text="Tillbaka" Clicked="onClickedCloseModal" BackgroundColor="#ff0000" BorderWidth="1" Margin="10"/>
+                    </StackLayout>
+                </StackLayout>
+            </On>
+        </OnPlatform>
     </ContentPage.Content>
 </ContentPage>

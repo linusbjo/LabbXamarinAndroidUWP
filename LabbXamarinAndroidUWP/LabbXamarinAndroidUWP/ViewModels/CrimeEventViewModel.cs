@@ -25,6 +25,7 @@ namespace LabbXamarinAndroidUWP.ViewModels
                 HttpResponseMessage response = await client.GetAsync(new Uri(apiURL)); // Calling api
                 
                 if (response.IsSuccessStatusCode)
+                //if(false)
                 {
                     string content = await response.Content.ReadAsStringAsync();
 
@@ -49,7 +50,7 @@ namespace LabbXamarinAndroidUWP.ViewModels
                     RaisePropertyChanged(nameof(CrimeEventList));
                 }
                 else
-                {
+                 {
                     //TODO: Error logic
 
                     LoadTestData();
@@ -85,10 +86,11 @@ namespace LabbXamarinAndroidUWP.ViewModels
         // Test data if API fails
         protected void LoadTestData()
         {
+            // Just a bunch of test data to see the design
             List<data> datalist = new List<data>();
-            datalist.Add(new data { location_string = "Göteborg", title_type = "Dråp", content_teaser = "Man för dråp", id = 1});
-            datalist.Add(new data { location_string = "Stenugnsund", title_type = "Trafikkontroll", content_teaser = "Magnus körde fort",id = 2 });
-            datalist.Add(new data { location_string = "Trollhättan", title_type = "Inbrott", content_teaser = "Man bröt sig in hos Magnus", id = 3 });
+            datalist.Add(new data { location_string = "Göteborg", title_type = "Dråp", content_teaser = "Gripen för dråp", id = 1, content = "Gripen för dråp", date_human = "2 timmar sedan" });
+            datalist.Add(new data { location_string = "Stenugnsund", title_type = "Trafikkontroll", content_teaser = "Anders körde fort",id = 2, content = "Anders körde fort", date_human = "2 timmar sedan" });
+            datalist.Add(new data { location_string = "Trollhättan", title_type = "Inbrott", content_teaser = "Man bröt sig in hos Jonas", id = 3, content = "Man bröt sig in hos Jonas", date_human = "2 timmar sedan" });
 
             foreach (var item in datalist)
             {
@@ -97,6 +99,7 @@ namespace LabbXamarinAndroidUWP.ViewModels
         }
         protected string RemoveTagsHTML(string content)
         {
+            // Using regex to remove the HTML tags
             // https://stackoverflow.com/questions/18153998/how-do-i-remove-all-html-tags-from-a-string-without-knowing-which-tags-are-in-it
 
             try
@@ -105,7 +108,7 @@ namespace LabbXamarinAndroidUWP.ViewModels
             }
             catch 
             {
-                // return content if regex failed
+                // return content if regex failed, even if it contains the tags
                 return content;
             }
            

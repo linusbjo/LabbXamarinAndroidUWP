@@ -17,8 +17,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="CardViewTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="DetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Template\" />
   </ItemGroup>
 </Project>

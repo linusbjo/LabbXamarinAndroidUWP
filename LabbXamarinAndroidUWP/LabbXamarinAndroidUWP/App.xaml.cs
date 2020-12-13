@@ -18,8 +18,6 @@ namespace LabbXamarinAndroidUWP
             App.CrimeEvents.showContent = false;
             
             NavigationPage page = new NavigationPage(new MainPage());
-            //page.BarBackgroundColor = (Color)Application.Current.Resources["Red"];
-
             MainPage = page;
         }
 
