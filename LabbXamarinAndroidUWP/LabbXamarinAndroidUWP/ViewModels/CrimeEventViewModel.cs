@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace LabbXamarinAndroidUWP.ViewModels
 {
@@ -50,8 +51,7 @@ namespace LabbXamarinAndroidUWP.ViewModels
                     RaisePropertyChanged(nameof(CrimeEventList));
                 }
                 else
-                 {
-                    //TODO: Error logic
+                {
 
                     LoadTestData();
                     StopActivityInidcator();
@@ -59,7 +59,7 @@ namespace LabbXamarinAndroidUWP.ViewModels
             }
             catch (Exception error)
             {
-                //TODO: Error logic
+                await Application.Current.MainPage.DisplayAlert("Error", error.Message, "Close");
                 StopActivityInidcator();
             }
         }
@@ -84,18 +84,26 @@ namespace LabbXamarinAndroidUWP.ViewModels
         }
 
         // Test data if API fails
-        protected void LoadTestData()
+        protected async void LoadTestData()
         {
-            // Just a bunch of test data to see the design
-            List<data> datalist = new List<data>();
-            datalist.Add(new data { location_string = "Göteborg", title_type = "Dråp", content_teaser = "Gripen för dråp", id = 1, content = "Gripen för dråp", date_human = "2 timmar sedan" });
-            datalist.Add(new data { location_string = "Stenugnsund", title_type = "Trafikkontroll", content_teaser = "Anders körde fort",id = 2, content = "Anders körde fort", date_human = "2 timmar sedan" });
-            datalist.Add(new data { location_string = "Trollhättan", title_type = "Inbrott", content_teaser = "Man bröt sig in hos Jonas", id = 3, content = "Man bröt sig in hos Jonas", date_human = "2 timmar sedan" });
-
-            foreach (var item in datalist)
+            try
             {
-                CrimeEventList.Add(item);
+                // Just a bunch of test data to see the design
+                List<data> datalist = new List<data>();
+                datalist.Add(new data { location_string = "Göteborg", title_type = "Dråp", content_teaser = "Gripen för dråp", id = 1, content = "Gripen för dråp", date_human = "2 timmar sedan" });
+                datalist.Add(new data { location_string = "Stenugnsund", title_type = "Trafikkontroll", content_teaser = "Anders körde fort", id = 2, content = "Anders körde fort", date_human = "2 timmar sedan" });
+                datalist.Add(new data { location_string = "Trollhättan", title_type = "Inbrott", content_teaser = "Man bröt sig in hos Jonas", id = 3, content = "Man bröt sig in hos Jonas", date_human = "2 timmar sedan" });
+
+                foreach (var item in datalist)
+                {
+                    CrimeEventList.Add(item);
+                }
             }
+            catch (Exception error)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", error.Message, "Close");
+            }
+       
         }
         protected string RemoveTagsHTML(string content)
         {
