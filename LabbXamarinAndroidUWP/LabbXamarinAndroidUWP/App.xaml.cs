@@ -1,7 +1,5 @@
-﻿using System;
+﻿using LabbXamarinAndroidUWP.ViewModels;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using LabbXamarinAndroidUWP.ViewModels;
 
 namespace LabbXamarinAndroidUWP
 {
@@ -12,18 +10,18 @@ namespace LabbXamarinAndroidUWP
         public App()
         {
             InitializeComponent();
- 
+
             //TODO: Better method for this???
             App.CrimeEvents.isLoadingAPI = true;
             App.CrimeEvents.showContent = false;
-            
+
             NavigationPage page = new NavigationPage(new MainPage());
             MainPage = page;
         }
 
         protected override async void OnStart()
         {
-           await CrimeEvents.LoadData();
+            await CrimeEvents.LoadData();
         }
 
         protected override void OnSleep()

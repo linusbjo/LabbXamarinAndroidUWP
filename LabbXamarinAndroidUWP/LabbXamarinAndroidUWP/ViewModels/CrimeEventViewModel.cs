@@ -1,11 +1,9 @@
 ﻿using LabbXamarinAndroidUWP.Models;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -24,7 +22,7 @@ namespace LabbXamarinAndroidUWP.ViewModels
             {
                 HttpClient client = new HttpClient();
                 HttpResponseMessage response = await client.GetAsync(new Uri(apiURL)); // Calling api
-                
+
                 if (response.IsSuccessStatusCode)
                 //if(false)
                 {
@@ -38,7 +36,7 @@ namespace LabbXamarinAndroidUWP.ViewModels
                     {
                         // Content contains html tags which shows up in Xamarin
                         item.content = RemoveTagsHTML(item.content);
-                       
+
                         // If content does not contain alot of text, I just type what is normally said
                         if (item.content_teaser == null || item.content_teaser.Length < 3)
                         {
@@ -64,7 +62,7 @@ namespace LabbXamarinAndroidUWP.ViewModels
         }
 
         // Show content, remove loading screen and tell Xamarin the properties are changed
-        protected void StopActivityInidcator() 
+        protected void StopActivityInidcator()
         {
             isLoadingAPI = false;
             RaisePropertyChanged(nameof(isLoadingAPI));
@@ -90,12 +88,12 @@ namespace LabbXamarinAndroidUWP.ViewModels
             {
                 return System.Text.RegularExpressions.Regex.Replace(content, "<.*?>", String.Empty);
             }
-            catch 
+            catch
             {
                 // return content if regex failed, even if it contains the tags
                 return content;
             }
-           
+
         }
     }
 }

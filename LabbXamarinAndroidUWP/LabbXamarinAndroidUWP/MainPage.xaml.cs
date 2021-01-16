@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LabbXamarinAndroidUWP.Models;
+using System;
 using Xamarin.Forms;
-using LabbXamarinAndroidUWP.Models;
-using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
-using Xamarin.Forms.PlatformConfiguration.WindowsSpecific;
 
 namespace LabbXamarinAndroidUWP
 {
@@ -20,7 +13,7 @@ namespace LabbXamarinAndroidUWP
         {
             InitializeComponent();
             BindingContext = App.CrimeEvents;
-            
+
         }
 
         // Opens details page
@@ -36,7 +29,7 @@ namespace LabbXamarinAndroidUWP
                 {
                     // Converting selectedItem into data object
                     var detailPage = new DetailPage();
-                   
+
                     // BindingContext for the new page. Sending the 
                     detailPage.BindingContext = _event;
                     await Navigation.PushModalAsync(detailPage);
@@ -45,7 +38,7 @@ namespace LabbXamarinAndroidUWP
             catch (Exception error)
             {
                 await DisplayAlert("Error - could not display data", error.Message.ToString(), "Close");
-            }         
+            }
         }
 
         // This gets the correct selected item
@@ -58,7 +51,7 @@ namespace LabbXamarinAndroidUWP
             catch (Exception error)
             {
                 await DisplayAlert("Error - could not display data", error.Message.ToString(), "Close");
-            }        
+            }
         }
     }
 }
